@@ -53,11 +53,46 @@ xlabel('R&D Spend');
 ylabel('Profit');
 hold on;
 plot(x_dum, h_val, 'r');
-% hold off;
+hold off;
 
 % (b) Plot the evolution of the cost function over iterations.
 figure(3)
 plot(1:n_i, c_val, 'b');
 xlabel('n_i');
+ylabel('Cost C');
+title('Evolution of the cost function over iterations');
+
+%% Problem 6
+% Now, change the for loop of your code to a while loop and define a fixed
+% tolerance you want to reach before the loop can stop. Could it be more
+% efficient to code it like this?
+tol = 1e-6;  % tolerance
+max_iter = 1e5; 
+iter = 0;
+GradC_prev = inf;
+change = inf;
+c_val_2 = zeros(max_iter, 1);
+while (change > tol) && (iter < max_iter)
+    GradC = gradC(theta, x_i, y_i);
+    change = norm(GradC_prev - GradC);
+    theta = theta - alpha*GradC;
+    iter = iter + 1;
+    GradC_prev = GradC;
+    h_val_2 = h(theta, x_i);
+    c_val_2(iter) = C(theta, x_i, y_i);
+end
+
+figure(4)
+scatter(x_dum, y_i);
+xlabel('R&D Spend');
+ylabel('Profit');
+hold on;
+plot(x_dum, h_val_2, 'r');
+hold off;
+
+% (b) Plot the evolution of the cost function over iterations.
+figure(5)
+plot(1:iter, c_val_2(1:iter), 'b');
+xlabel('n_i_2');
 ylabel('Cost C');
 title('Evolution of the cost function over iterations');
