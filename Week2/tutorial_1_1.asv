@@ -1,0 +1,38 @@
+clear all; clc;
+data = csvread('startup_data.csv',1,1);
+x = data(1:100, [1 2 3 5]);
+y = data(1:100,4);
+
+data_1 = [x y];
+cv = cvpartition(size(data_1,1),'HoldOut',0.2);
+% Split the data into training and testing sets
+trainData = data_1(cv.training,:);
+testData = data_1(cv.test,:);
+
+% Split the input and output variables
+xTrain = trainData(:,1:end-1);
+yTrain = trainData(:,end);
+xTest = testData(:,1:end-1);
+yTest = testData(:,end);
+
+% Add a column of ones to the input data for the intercept term
+Xtrain = [ones(size(xTrain,1),1) xTrain];
+
+% Calculate the optimal values of theta using the normal equation method
+theta = (Xtrain'*Xtrain)\(Xtrain'*yTrain);
+
+% Create scatter plot of xTrain and yTrain
+scatter(xTrain, yTrain);
+
+% Calculate predicted y values
+yPred = xTest* theta;
+
+% Add regression line to the plot
+hold on;
+plot(xTrain, yPred, 'r-', 'LineWidth', 2);
+hold off;
+
+% Add axis labels and legend
+xlabel('Input x');
+ylabel('Output y');
+legend({'Training Data', 'Fitted Line'});
