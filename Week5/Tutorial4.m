@@ -104,14 +104,13 @@ C_iter_hist = C_iter_hist(1:idx);
 C_full_hist = C_full_hist(1:iter);
 
 % Plot: (1) the cost of each iteration, (2) the cost of the full dataset
-figure;
+figure(1);
 plot(C_iter_hist);
 title('Cost for Each Iteration');
 xlabel('Iteration');
 ylabel('Cost');
 
-% Plot the cost for the full dataset over iterations
-figure;
+figure(2);
 plot(C_full_hist);
 title('Cost for Full Dataset Over Iterations');
 xlabel('Iteration');
