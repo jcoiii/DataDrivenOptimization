@@ -1,4 +1,4 @@
-clear; clc;
+clear; clc; close all;
 %% Problem 1.1
 % make 50 points equally spaced between 0 & 1 as the 
 % input dataset {u^(i)}^50_{i=1}. 0 is not included in u_i.
