@@ -25,11 +25,21 @@ x = linspace(min(x_i(:,1)),max(x_i(:,1)));
 f = @(x) -(w_0_star(1)*x + b_0_star)/w_0_star(2);
 y = f(x);
 
+% Determine the support vectors:
+f_dneg = @(x) -(w(1)*x + b -1)/w(2);
+f_dpos = @(x) -(w(1)*x + b +1)/w(2);
+y_dneg = f_dneg(x);
+y_dpos = f_dpos(x);
+
+
 % Plot the result
+figure(1)
 scatter(x_i(y_i == 1,1), x_i(y_i == 1,2),'b+')
 hold on
 scatter(x_i(y_i == -1,1), x_i(y_i == -1,2), '+r')
 plot(x,y,'k')
+plot(x,y_dneg,'k--')
+plot(x,y_dpos,'k--')
 legend('Setosa','Versicolor','Decision Boundary')
 title('Sepal length vs Petal length')
 hold off
@@ -56,12 +66,20 @@ x_new = linspace(min(x_i_new(:,1)),max(x_i_new(:,1)));
 f_new = @(x) -(w_1_star(1)*x + b_1_star)/w_1_star(2);
 y_new = f_new(x_new);
 
+% Determine the support vectors:
+f_dneg_new = @(x) -(w_1(1)*x + b_1 -1)/w_1(2);
+f_dpos_new = @(x) -(w_1(1)*x + b_1 +1)/w_1(2);
+y_dneg_new = f_dneg_new(x_new);
+y_dpos_new = f_dpos_new(x_new);
+
 % Plot the result
 figure(2)
 scatter(x_i_new(y_i == 1,1), x_i_new(y_i == 1,2),'b+')
 hold on
 scatter(x_i_new(y_i == -1,1), x_i_new(y_i == -1,2), '+r')
 plot(x_new,y_new,'k')
+plot(x_new,y_dneg_new,'k--')
+plot(x_new,y_dpos_new,'k--')
 legend('Setosa','Versicolor','Decision Boundary')
 title('Sepal length vs Petal length (shifted)')
 hold off
@@ -89,12 +107,20 @@ x_new_rot = linspace(min(x_i_rot(:,1)),max(x_i_rot(:,1)));
 f_new_rot = @(x) -(w_2_star(1)*x + b_2_star)/w_2_star(2);
 y_new_rot = f_new_rot(x_new_rot);
 
+% Determine the support vectors:
+f_dneg_rot = @(x) -(w_2(1)*x + b_2 -1)/w_2(2);
+f_dpos_rot = @(x) -(w_2(1)*x + b_2 +1)/w_2(2);
+y_dneg_rot = f_dneg_rot(x_new_rot);
+y_dpos_rot = f_dpos_rot(x_new_rot);
+
 % Plot the result
-figure(2)
+figure(3)
 scatter(x_i_rot(y_i == 1,1), x_i_rot(y_i == 1,2),'b+')
 hold on
 scatter(x_i_rot(y_i == -1,1), x_i_rot(y_i == -1,2), '+r')
 plot(x_new_rot,y_new_rot,'k')
+plot(x_new_rot,y_dneg_rot,'k--')
+plot(x_new_rot,y_dpos_rot,'k--')
 legend('Setosa','Versicolor','Decision Boundary')
 title('Sepal length vs Petal length (Rotated)')
 hold off

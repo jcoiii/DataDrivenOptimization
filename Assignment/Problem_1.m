@@ -27,8 +27,6 @@ theta_minm = (X' * X) \ (X' * v_i);
 
 u_test = linspace(0, 1, 50)';
 v_test = u_test.*sin(2*pi*u_test) + unifrnd(-0.1, 0.1, [50, 1]);
-
-% Calculate predicted values using the learned model
 h_theta_star = [ones(50, 1), u_test, u_test.^2, u_test.^3]*theta_minm;
 
 % Plot the learned model
@@ -45,7 +43,7 @@ grid on;
 hold off;
 
 rms_error = sqrt(mean((h_theta_star - v_test).^2));
-fprintf('The RMS error is: %.4f\n', rms_error);
+fprintf('RMS error is: %.4f\n', rms_error);
 
 %% Problem 1.6
 % Repeat previous steps with M = 1 and 9
@@ -70,7 +68,7 @@ grid on;
 hold off;
 
 rms_error_1 = sqrt(mean((h_theta_star_1 - v_test).^2));
-fprintf('The RMS error for first order model is: %.4f\n', rms_error_1);
+fprintf('RMS error for first order model is: %.4f\n', rms_error_1);
 
 figure(3)
 plot(u_test, h_theta_star_9, 'r', 'LineWidth', 1.5);
@@ -85,4 +83,4 @@ grid on;
 hold off;
 
 rms_error_9 = sqrt(mean((h_theta_star_9 - v_test).^2));
-fprintf('The RMS error for ninth order model is: %.4f\n', rms_error_9);
+fprintf('RMS error for ninth order model is: %.4f\n', rms_error_9);
